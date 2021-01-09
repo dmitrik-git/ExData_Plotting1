@@ -13,8 +13,12 @@ unzip("./data/household_power_consumption.zip", exdir = "./data/")
 fileName <- "./data/household_power_consumption.txt"
 
 # Reading data
-dataOriginal <- read.csv(fileName, na.strings = "?", header = TRUE, sep = ";")
+dataOriginal <- read.csv(fileName, na.strings = "?", header = TRUE, sep = ";", stringsAsFactors = FALSE)
 
-dataSet <- dataOriginal[as.Date(dataOriginal$Date) == "02/01/2007",]
-dataSet <- rbind(dataSet, dataOriginal[as.Date(dataOriginal$Date) == "02/02/2007",])
-dataSet <- cbind(dataSet, "DateTime" = strptime (paste (dataSet$Date, dataSet$Time), format = "%m/%d/%Y %H:%M:%S")) 
+dataOriginal <- cbind(dataOriginal, "DateTime" = strptime (paste (dataOriginal$Date, dataOriginal$Time), format = "%d/%m/%Y %H:%M:%S")) 
+dataSet <- dataOriginal[as.Date(dataOriginal$Date, format = "%d/%m/%Y") == as.Date("2007-02-01"),]
+dataSet <- rbind(dataSet, dataOriginal[as.Date(dataOriginal$Date, format = "%d/%m/%Y") == as.Date("2007-02-02"),])
+
+png(file = "plot1.png", width = 480, height = 480)
+hist(dataSet$Global_active_power, col = "red", xlab = "Global Active Power (kilowatts)", main = "Global Active Power")
+dev.off()
