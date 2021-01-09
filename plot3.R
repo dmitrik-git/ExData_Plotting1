@@ -25,13 +25,14 @@ dataSet <- transform (dataSet, Wday = factor(weekdays (dataSet$DateTime, abbrevi
 
 
 par (yaxt = 's', yaxs = 'r')
-with (dataSet, plot(DateTime, Sub_metering_1, type = "l"))
+with (dataSet, plot(DateTime, Sub_metering_1, ylab = "", type = "l"))
 par(new = TRUE, yaxt = 'n')
-with (dataSet, plot(DateTime, Sub_metering_2, type = "l", col = "red", ylim = c(0,30)))
+with (dataSet, plot(DateTime, Sub_metering_2, ylab = "", type = "l", col = "red", ylim = c(0,30)))
 par(new = TRUE, yaxt = 'n')
-with (dataSet, plot(DateTime, Sub_metering_3, type = "l", col = "blue", ylim = c(0,30)))
+with (dataSet, plot(DateTime, Sub_metering_3, ylab= "Energy sub metering", type = "l", col = "blue", ylim = c(0,30)))
 
 legend ("topright", lty = 1, col = c("black", "red", "blue"), legend = c("Sub_metering_1", "Sub_metering_2", "Sub_metering_3"))
+
 
 dev.off()
 
