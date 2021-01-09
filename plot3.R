@@ -24,7 +24,7 @@ png(file = "plot3.png", width = 480, height = 480)
 dataSet <- transform (dataSet, Wday = factor(weekdays (dataSet$DateTime, abbreviate = TRUE) ))
 
 
-par (yaxt = 's', yaxs = 'r')
+par (yaxt = 's', yaxs = 'r', xaxt = 's')
 with (dataSet, plot(DateTime, Sub_metering_1, ylab = "", type = "l"))
 par(new = TRUE, yaxt = 'n')
 with (dataSet, plot(DateTime, Sub_metering_2, ylab = "", type = "l", col = "red", ylim = c(0,30)))
@@ -32,7 +32,7 @@ par(new = TRUE, yaxt = 'n')
 with (dataSet, plot(DateTime, Sub_metering_3, ylab= "Energy sub metering", type = "l", col = "blue", ylim = c(0,30)))
 
 legend ("topright", lty = 1, col = c("black", "red", "blue"), legend = c("Sub_metering_1", "Sub_metering_2", "Sub_metering_3"))
-
+par(new = FALSE, yaxt = 's')
 
 dev.off()
 
